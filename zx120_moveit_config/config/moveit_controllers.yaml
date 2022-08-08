@@ -7,6 +7,7 @@ moveit_simple_controller_manager:
     - upper_arm_controller
 
   upper_arm_controller:
+    action_ns: follow_joint_trajectory # add
     type: FollowJointTrajectory
     joints:
       - swing_joint
