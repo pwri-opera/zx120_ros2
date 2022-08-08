@@ -4,9 +4,9 @@ moveit_controller_manager: moveit_simple_controller_manager/MoveItSimpleControll
 
 moveit_simple_controller_manager:
   controller_names:
-    - manipulator_controller
+    - upper_arm_controller
 
-  manipulator_controller:
+  upper_arm_controller:
     type: FollowJointTrajectory
     joints:
       - swing_joint
