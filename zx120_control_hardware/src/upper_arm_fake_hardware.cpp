@@ -41,6 +41,8 @@ namespace zx120_control_hardware
 
 
     // input initial pose here
+    // not for real robot
+    // should get from init file
     hw_commands_[0] = 0;
     hw_commands_[1] = 0;
     hw_commands_[2] = 1;

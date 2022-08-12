@@ -6,42 +6,43 @@
         <ros2_control name="${name}" type="system">
             <hardware>
                 <!-- By default, set up controllers for simulation. This won't work on real hardware -->
-                <plugin>mock_components/GenericSystem</plugin>
+                <!-- <plugin>mock_components/GenericSystem</plugin> -->
+                <plugin>zx120_control_hardware/Zx120UpperArmPositionHardware</plugin>
             </hardware>
             <joint name="swing_joint">
                 <command_interface name="position"/>
                 <state_interface name="position">
                   <param name="initial_value">${initial_positions['swing_joint']}</param>
                 </state_interface>
-                <state_interface name="velocity"/>
+                <!-- <state_interface name="velocity"/> -->
             </joint>
             <joint name="boom_joint">
                 <command_interface name="position"/>
                 <state_interface name="position">
                   <param name="initial_value">${initial_positions['boom_joint']}</param>
                 </state_interface>
-                <state_interface name="velocity"/>
+                <!-- <state_interface name="velocity"/> -->
             </joint>
             <joint name="arm_joint">
                 <command_interface name="position"/>
                 <state_interface name="position">
                   <param name="initial_value">${initial_positions['arm_joint']}</param>
                 </state_interface>
-                <state_interface name="velocity"/>
+                <!-- <state_interface name="velocity"/> -->
             </joint>
             <joint name="bucket_joint">
                 <command_interface name="position"/>
                 <state_interface name="position">
                   <param name="initial_value">${initial_positions['bucket_joint']}</param>
                 </state_interface>
-                <state_interface name="velocity"/>
+                <!-- <state_interface name="velocity"/> -->
             </joint>
             <joint name="bucket_end_joint">
                 <command_interface name="position"/>
                 <state_interface name="position">
                   <param name="initial_value">${initial_positions['bucket_end_joint']}</param>
                 </state_interface>
-                <state_interface name="velocity"/>
+                <!-- <state_interface name="velocity"/> -->
             </joint>
 
         </ros2_control>

@@ -7,8 +7,10 @@
 
     <!-- Import control_xacro -->
     <xacro:include filename="zx120.ros2_control.xacro" />
+    <!-- <xacro:include filename="$(find zx120_moveit_config)/config/zx120.ros2_control.xacro" /> -->
 
+    <!-- <xacro:zx120_ros2_control name="FakeSystem" initial_positions_file="$(arg initial_positions_file)"/> -->
 
-    <xacro:zx120_ros2_control name="FakeSystem" initial_positions_file="$(arg initial_positions_file)"/>
-
+    <xacro:zx120_ros2_control name="trajectory_control" initial_positions_file="$(arg initial_positions_file)"/>
+    <!-- The name must not be ideal(not same as Zx120UpperArmPositionHardware) -->
 </robot>

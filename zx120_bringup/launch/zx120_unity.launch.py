@@ -30,20 +30,21 @@ def generate_launch_description():
         .to_moveit_configs()
     )
 
-    robot_description_content = Command(
-        [
-            PathJoinSubstitution([FindExecutable(name="xacro")]),
-            " ",
-            PathJoinSubstitution(
-                [
-                    FindPackageShare("zx120_description"),
-                    "urdf",
-                    "zx120.xacro",
-                ]
-            ),
-        ]
-    )
-    robot_description = {"robot_description": robot_description_content}
+    # robot_description_content = Command(
+    #     [
+    #         PathJoinSubstitution([FindExecutable(name="xacro")]),
+    #         " ",
+    #         PathJoinSubstitution(
+    #             [
+    #                 FindPackageShare("zx120_description"),
+    #                 "urdf",
+    #                 "zx120.xacro",
+    #             ]
+    #         ),
+    #     ]
+    # )
+    # robot_description = {"robot_description": robot_description_content}
+    # robot_description = {"robot_description": moveit_config.robot_description}
 
     run_move_group = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
@@ -83,15 +84,9 @@ def generate_launch_description():
     control_node = Node(
         package="controller_manager",
         executable="ros2_control_node",
-        parameters=[robot_description, robot_controllers],
+        parameters=[moveit_config.robot_description, robot_controllers],
+        # parameters=[robot_description, robot_controllers],
         output="both",
-    )
-
-    robot_state_pub_node = Node(
-        package="robot_state_publisher",
-        executable="robot_state_publisher",
-        output="both",
-        parameters=[robot_description],
     )
 
     joint_state_broadcaster_spawner = Node(
@@ -111,7 +106,7 @@ def generate_launch_description():
         run_move_group,
         run_rviz,
         static_tf,
-        robot_state_pub_node,
+        run_robot_state_publisher,
         control_node,
         joint_state_broadcaster_spawner,
         arm_controller_spawner,
