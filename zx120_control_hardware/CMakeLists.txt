@@ -30,6 +30,7 @@ add_library(
   ${PROJECT_NAME}
   SHARED
   src/upper_arm_fake_hardware.cpp
+  src/upper_arm_unity_hardware.cpp
 )
 target_include_directories(
   ${PROJECT_NAME}

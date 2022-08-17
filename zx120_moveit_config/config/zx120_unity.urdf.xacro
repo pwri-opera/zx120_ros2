@@ -11,6 +11,6 @@
 
     <!-- <xacro:zx120_ros2_control name="FakeSystem" initial_positions_file="$(arg initial_positions_file)"/> -->
 
-    <xacro:zx120_ros2_control name="trajectory_control" plugin="zx120_control_hardware/Zx120UpperArmPositionHardware" initial_positions_file="$(arg initial_positions_file)"/>
+    <xacro:zx120_ros2_control name="trajectory_control" plugin="zx120_control_hardware/Zx120UpperArmPositionUnityHardware" initial_positions_file="$(arg initial_positions_file)"/>
     <!-- The name must not be ideal(not same as Zx120UpperArmPositionHardware) -->
 </robot>

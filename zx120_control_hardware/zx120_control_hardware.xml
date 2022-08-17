@@ -6,6 +6,14 @@
       The ROS2 Control minimal robot protocol. This is example for start porting the robot from ROS 1.
     </description>
   </class>
+  <class name="zx120_control_hardware/Zx120UpperArmPositionUnityHardware"
+         type="zx120_control_hardware::Zx120UpperArmPositionUnityHardware"
+         base_class_type="hardware_interface::SystemInterface">
+    <description>
+      The ROS2 Control minimal robot protocol. This is example for start porting the robot from ROS 1.
+    </description>
+  </class>
+
   <!-- <class name="zx120_control_hardware/RRBotSystemMultiInterfaceHardware"
          type="zx120_control_hardware::RRBotSystemMultiInterfaceHardware"
          base_class_type="hardware_interface::SystemInterface">

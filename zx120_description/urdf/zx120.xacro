@@ -6,6 +6,8 @@
 	<!-- Import Rviz colors -->
 	<!-- <xacro:include filename="$(find zx120_description)/urdf/materials.xacro" /> -->
 
+  <!-- <xacro:include filename="$(find zx120_description)/urdf/zx120.ros2_control.xacro" /> -->
+
 	<!-- Base Link -->
 	<link name="base_link"/>
 	<joint name="base_joint" type="fixed">
@@ -172,7 +174,7 @@
       <geometry>
         <box size="0.001 0.001 0.001" />
       </geometry>
-      <material name="red"/>
+      <!-- <material name="red"/> -->
     </visual>
     <inertial>
       <origin xyz="0 0 0" />
@@ -191,60 +193,6 @@
     <limit effort="1" lower="-3.14" upper="3.14" velocity="0.5"/>
   </joint>
 
-
-	<transmission name="tran1">
-		<type>transmission_interface/SimpleTransmission</type>
-		<joint name="swing_joint">
-			<hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
-		</joint>
-		<actuator name="motor1">
-			<hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
-			<mechanicalReduction>1</mechanicalReduction>
-		</actuator>
-	</transmission>
-
-	<transmission name="tran2">
-		<type>transmission_interface/SimpleTransmission</type>
-		<joint name="boom_joint">
-			<hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
-		</joint>
-		<actuator name="motor2">
-			<hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
-			<mechanicalReduction>1</mechanicalReduction>
-		</actuator>
-	</transmission>
-
-	<transmission name="tran3">
-		<type>transmission_interface/SimpleTransmission</type>
-		<joint name="arm_joint">
-			<hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
-		</joint>
-		<actuator name="motor3">
-			<hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
-			<mechanicalReduction>1</mechanicalReduction>
-		</actuator>
-	</transmission>
-
-	<transmission name="tran4">
-		<type>transmission_interface/SimpleTransmission</type>
-		<joint name="bucket_joint">
-			<hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
-		</joint>
-		<actuator name="motor4">
-			<hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
-			<mechanicalReduction>1</mechanicalReduction>
-		</actuator>
-	</transmission>
-
-  <transmission name="dummy_trans1">
-    <type>transmission_interface/SimpleTransmission</type>
-      <joint name="bucket_end_joint">
-      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
-    </joint>
-    <actuator name="dummy_motor1">
-      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
-      <mechanicalReduction>1</mechanicalReduction>
-    </actuator>
-  </transmission>
+	<!-- <xacro:zx120_ros2_control/> -->
 
 </robot>
