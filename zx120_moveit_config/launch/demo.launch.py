@@ -17,9 +17,9 @@ def generate_launch_description():
     moveit_config = (
         # Simplify loading config
         MoveItConfigsBuilder(
-            robot_name, package_name=robot_name+"_moveit_config").to_moveit_configs()
+            robot_name=robot_name, package_name=robot_name+"_moveit_config").to_moveit_configs()
     )
-    generate_demo_launch(moveit_config)
+    # return generate_demo_launch(moveit_config)
 
     # Start the actual move_group node/action server
     move_group_node = Node(
