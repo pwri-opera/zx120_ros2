@@ -29,8 +29,9 @@ find_package(sensor_msgs REQUIRED)
 add_library(
   ${PROJECT_NAME}
   SHARED
-  src/upper_arm_fake_hardware.cpp
+  # src/upper_arm_fake_hardware.cpp
   src/upper_arm_unity_hardware.cpp
+  src/upper_arm_hardware.cpp
 )
 target_include_directories(
   ${PROJECT_NAME}
@@ -64,6 +65,10 @@ install(DIRECTORY
 install(
   DIRECTORY include/
   DESTINATION include
+)
+
+install(DIRECTORY launch 
+DESTINATION share/${PROJECT_NAME}
 )
 
 if(BUILD_TESTING)
