@@ -1,0 +1,23 @@
+<launch>
+    <group>
+        <push-ros-namespace namespace="zx120"/>
+        <push-ros-namespace namespace="gnss_compass"/>
+
+        <node name="nmea_serial_driver_node" pkg="nmea_navsat_driver" exec="nmea_serial_driver" output="screen">
+            <param name="port" value="/dev/ttyS0"/>
+            <param name="baud" value="115200" />
+            <param name="frame_id" value="map" />
+            <param name="use_GNSS_time" value="False" />
+            <param name="time_ref_source" value="gps" />
+            <param name="useRMC" value="False" />
+            <!-- <node pkg="gnss_poser" exec="gnss_poser" name="fix2tfpose" output="log">
+                <param name="plane_zone" value="9"/>
+                <remap from="fix" to="fix_remapped"/>
+            </node> -->
+        </node>
+        <node pkg="gnss_poser" exec="gnss_poser" name="fix2tfpose" output="log">
+            <param name="plane_zone" value="9"/>
+        </node>
+
+    </group>
+</launch>
