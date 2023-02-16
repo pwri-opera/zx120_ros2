@@ -58,6 +58,7 @@ namespace zx120_control_hardware
       std::vector<double> hw_states_;
       std::vector<double> position_states_;
       std::vector<double> velocity_states_;
+      std::vector<double> ac58_joint_states_;
 
       std::shared_ptr<rclcpp::Node> node_;
       std::thread node_thread_;

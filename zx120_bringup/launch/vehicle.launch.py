@@ -61,7 +61,7 @@ def generate_launch_description():
     ###
     
     ld = LaunchDescription()
-    ld.add_action(moveit_demo_launch)
+    # ld.add_action(moveit_demo_launch)
     ld.add_action(controller_manager)
     ld.add_action(spawn_joint_state_broadcaster)
     ld.add_action(spawn_upper_arm_controller)
