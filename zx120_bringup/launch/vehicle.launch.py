@@ -17,16 +17,25 @@ from launch.substitutions import PathJoinSubstitution, TextSubstitution
 
 
 def generate_launch_description():
+    
+    robot_name="zx120"    
+    # Define arguments for launch files
+    # robot_name = LaunchConfiguration("robot_name")
+    # declare_robot_name = DeclareLaunchArgument(
+    #     "robot_name",
+    #     default_value="zx120",
+    #     description="Name of a robot"
+    # )
+    
     # Get the launch directory
     deadtime_compensation_dir_path = get_package_share_directory("deadtime_compensation")
     excavator_pid_control_dir_path = get_package_share_directory("excavator_pid_control")
     
-    
     # config
     moveit_config = (
         MoveItConfigsBuilder(
-            robot_name="zx120", package_name="zx120_moveit_config")
-        .robot_description(file_path="config/"+"zx120.urdf.xacro")
+            robot_name=robot_name, package_name=robot_name+"_moveit_config")
+        .robot_description(file_path="config/"+robot_name+".urdf.xacro")
         .to_moveit_configs()
     )
 
@@ -38,7 +47,7 @@ def generate_launch_description():
     deadtime_compensation_launch = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
             os.path.join(deadtime_compensation_dir_path, "launch/deadtime_compensation.launch.py")),
-        launch_arguments={"enable": "True"}.items()
+        launch_arguments={"dt_compensate": "True"}.items()
     )
     ###
     
@@ -88,6 +97,8 @@ def generate_launch_description():
     # ###
     
     ld = LaunchDescription()
+    # ld.add_action(declare_robot_name)
+    
     ld.add_action(moveit_demo_launch)
     ld.add_action(deadtime_compensation_launch)
     ld.add_action(pid_control_launch)
