@@ -22,10 +22,10 @@ namespace zx120_control_hardware
 
     node_ = rclcpp::Node::make_shared("uac_fake_hw");
     joint_state_pub_ = node_->create_publisher<sensor_msgs::msg::JointState>("/test/joint_states", 100);
-    swing_cmd_pub_ = node_->create_publisher<std_msgs::msg::Float64>("/swing/setpoint_common", 100);
-    boom_cmd_pub_ = node_->create_publisher<std_msgs::msg::Float64>("/boom/setpoint_common", 100);
-    arm_cmd_pub_ = node_->create_publisher<std_msgs::msg::Float64>("/arm/setpoint_common", 100);
-    bucket_cmd_pub_ = node_->create_publisher<std_msgs::msg::Float64>("/bucket/setpoint_common", 100);
+    swing_setpoint_pub_ = node_->create_publisher<std_msgs::msg::Float64>("/swing/setpoint_common", 100);
+    boom_setpoint_pub_ = node_->create_publisher<std_msgs::msg::Float64>("/boom/setpoint_common", 100);
+    arm_setpoint_pub_ = node_->create_publisher<std_msgs::msg::Float64>("/arm/setpoint_common", 100);
+    bucket_setpoint_pub_ = node_->create_publisher<std_msgs::msg::Float64>("/bucket/setpoint_common", 100);
 
     swing_state_pub_ = node_->create_publisher<std_msgs::msg::Float64>("/swing/state", 100);
     boom_state_pub_ = node_->create_publisher<std_msgs::msg::Float64>("/boom/state", 100);
@@ -48,7 +48,7 @@ namespace zx120_control_hardware
 
     hw_states_.resize(info_.joints.size(), 0);
     hw_commands_.resize(info_.joints.size(), 0);
-    ac58_joint_states_.resize(info_.joints.size(), 0);
+    ac58_joint_states_.resize(info_.joints.size(), 0.7);
 
     /* input initial pose here not for real robot should get from init file */
     hw_commands_[0] = 0;
@@ -150,19 +150,31 @@ namespace zx120_control_hardware
   hardware_interface::return_type Zx120UpperArmPositionHardware::read(
       const rclcpp::Time & /*time*/, const rclcpp::Duration & /*period*/)
   {
-    joint_state_msg_.header.stamp = node_->get_clock()->now();
+    return hardware_interface::return_type::OK;
+  }
+
+  hardware_interface::return_type Zx120UpperArmPositionHardware::write(
+      const rclcpp::Time & /*time*/, const rclcpp::Duration & /*period*/)
+  {
+    // for (int i = 0; i < (int)hw_commands_.size(); i++)
+    // {
+    //   hw_states_[i] = hw_commands_[i];
+    //   joint_state_msg_.position[i] = hw_commands_[i];
+    // }
+    
+    // joint_state_msg_.header.stamp = node_->get_clock()->now();
     // joint_state_pub_->publish(joint_state_msg_);
-    // angle_cmd_.data = hw_commands_[0];
-    // swing_cmd_pub_->publish(angle_cmd_);
-    // angle_cmd_.data = hw_commands_[1];
-    // boom_cmd_pub_->publish(angle_cmd_);
-    // angle_cmd_.data = hw_commands_[2];
-    // arm_cmd_pub_->publish(angle_cmd_);
-    // angle_cmd_.data = hw_commands_[3];
-    // bucket_cmd_pub_->publish(angle_cmd_);
+    angle_cmd_.data = hw_commands_[0];
+    swing_setpoint_pub_->publish(angle_cmd_);
+    angle_cmd_.data = hw_commands_[1];
+    boom_setpoint_pub_->publish(angle_cmd_);
+    angle_cmd_.data = hw_commands_[2];
+    arm_setpoint_pub_->publish(angle_cmd_);
+    angle_cmd_.data = hw_commands_[3];
+    bucket_setpoint_pub_->publish(angle_cmd_);
 
     std_msgs::msg::Float64 tmp_state;
-    // /joint_statesに/ac58/jsを反映するため。ただ固まる？
+    // /joint_statesに/ac58_joint_publisher/joint_states を常に反映するため
     hw_states_[0]=ac58_joint_states_[0];
     hw_states_[1]=ac58_joint_states_[1];
     hw_states_[2]=ac58_joint_states_[2];
@@ -185,18 +197,6 @@ namespace zx120_control_hardware
     // arm_state_pub_->publish(tmp_state);
     // tmp_state.data=ac58_joint_states_[3];
     // bucket_state_pub_->publish(tmp_state);
-
-    return hardware_interface::return_type::OK;
-  }
-
-  hardware_interface::return_type Zx120UpperArmPositionHardware::write(
-      const rclcpp::Time & /*time*/, const rclcpp::Duration & /*period*/)
-  {
-    for (int i = 0; i < (int)hw_commands_.size(); i++)
-    {
-      hw_states_[i] = hw_commands_[i];
-      joint_state_msg_.position[i] = hw_commands_[i];
-    }
 
     return hardware_interface::return_type::OK;
   }

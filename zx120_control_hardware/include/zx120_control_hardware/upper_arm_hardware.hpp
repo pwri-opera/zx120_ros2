@@ -63,10 +63,10 @@ namespace zx120_control_hardware
       std::shared_ptr<rclcpp::Node> node_;
       std::thread node_thread_;
       rclcpp::Publisher<sensor_msgs::msg::JointState>::SharedPtr joint_state_pub_;
-      rclcpp::Publisher<std_msgs::msg::Float64>::SharedPtr swing_cmd_pub_;
-      rclcpp::Publisher<std_msgs::msg::Float64>::SharedPtr boom_cmd_pub_;
-      rclcpp::Publisher<std_msgs::msg::Float64>::SharedPtr arm_cmd_pub_;
-      rclcpp::Publisher<std_msgs::msg::Float64>::SharedPtr bucket_cmd_pub_;
+      rclcpp::Publisher<std_msgs::msg::Float64>::SharedPtr swing_setpoint_pub_;
+      rclcpp::Publisher<std_msgs::msg::Float64>::SharedPtr boom_setpoint_pub_;
+      rclcpp::Publisher<std_msgs::msg::Float64>::SharedPtr arm_setpoint_pub_;
+      rclcpp::Publisher<std_msgs::msg::Float64>::SharedPtr bucket_setpoint_pub_;
 
       rclcpp::Publisher<std_msgs::msg::Float64>::SharedPtr swing_state_pub_;
       rclcpp::Publisher<std_msgs::msg::Float64>::SharedPtr boom_state_pub_;
