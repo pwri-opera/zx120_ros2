@@ -36,12 +36,12 @@ class Pose2odom(Node):
         super().__init__('pose_to_odom')
         self.subscription = self.create_subscription(
             PoseStamped,
-            '/zx120/map2base_pose',
+            'map2base_pose',
             self.pose_callback,
             10)
         self.subscription
 
-        self.publisher_ = self.create_publisher(Odometry, '/zx120/gnss_odom', 10)
+        self.publisher_ = self.create_publisher(Odometry, 'gnss_odom', 10)
         timer_period = 0.02 # seconds. means 50 Hz
         self.timer = self.create_timer(timer_period, self.timer_callback)
         self.i = 0

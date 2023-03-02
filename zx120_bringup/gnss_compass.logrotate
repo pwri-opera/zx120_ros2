@@ -1,0 +1,14 @@
+#---------------------------------------------------------------------
+# gnss_compass.logrotate
+#---------------------------------------------------------------------
+
+/home/zx120/ros2_ws/src/zx120_ros2/zx120_bringup/log/gnss_compass.log {
+  daily
+  missingok
+  rotate 15
+  compress
+  delaycompress
+  notifempty
+  copytruncate
+  su zx120 dialout
+}
