@@ -21,18 +21,18 @@ namespace zx120_control_hardware
     }
 
     node_ = rclcpp::Node::make_shared("uac_fake_hw");
-    joint_state_pub_ = node_->create_publisher<sensor_msgs::msg::JointState>("/test/joint_states", 100);
-    swing_setpoint_pub_ = node_->create_publisher<std_msgs::msg::Float64>("/swing/setpoint_common", 100);
-    boom_setpoint_pub_ = node_->create_publisher<std_msgs::msg::Float64>("/boom/setpoint_common", 100);
-    arm_setpoint_pub_ = node_->create_publisher<std_msgs::msg::Float64>("/arm/setpoint_common", 100);
-    bucket_setpoint_pub_ = node_->create_publisher<std_msgs::msg::Float64>("/bucket/setpoint_common", 100);
+    // joint_state_pub_ = node_->create_publisher<sensor_msgs::msg::JointState>("/test/joint_states", 100);
+    swing_setpoint_pub_ = node_->create_publisher<std_msgs::msg::Float64>("swing/setpoint_common", 100);
+    boom_setpoint_pub_ = node_->create_publisher<std_msgs::msg::Float64>("boom/setpoint_common", 100);
+    arm_setpoint_pub_ = node_->create_publisher<std_msgs::msg::Float64>("arm/setpoint_common", 100);
+    bucket_setpoint_pub_ = node_->create_publisher<std_msgs::msg::Float64>("bucket/setpoint_common", 100);
 
-    swing_state_pub_ = node_->create_publisher<std_msgs::msg::Float64>("/swing/state", 100);
-    boom_state_pub_ = node_->create_publisher<std_msgs::msg::Float64>("/boom/state", 100);
-    arm_state_pub_ = node_->create_publisher<std_msgs::msg::Float64>("/arm/state", 100);
-    bucket_state_pub_ = node_->create_publisher<std_msgs::msg::Float64>("/bucket/state", 100);
+    swing_state_pub_ = node_->create_publisher<std_msgs::msg::Float64>("swing/state", 100);
+    boom_state_pub_ = node_->create_publisher<std_msgs::msg::Float64>("boom/state", 100);
+    arm_state_pub_ = node_->create_publisher<std_msgs::msg::Float64>("arm/state", 100);
+    bucket_state_pub_ = node_->create_publisher<std_msgs::msg::Float64>("bucket/state", 100);
 
-    ac58_js_sub_=node_->create_subscription<sensor_msgs::msg::JointState>("/ac58_joint_publisher/joint_states",100,[this](sensor_msgs::msg::JointState msg){ ac58_js_callback(msg);});
+    ac58_js_sub_=node_->create_subscription<sensor_msgs::msg::JointState>("ac58_joint_publisher/joint_states",100,[this](sensor_msgs::msg::JointState msg){ ac58_js_callback(msg);});
 
     node_thread_ = std::thread([this]()
                                { rclcpp::spin(node_); });
