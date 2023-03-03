@@ -68,40 +68,6 @@ Visualization Manager:
         Expand Link Details: false
         Expand Tree: false
         Link Tree Style: Links in Alphabetic Order
-        arm_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        base_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        body_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        boom_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        bucket_end_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        bucket_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        track_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
       Mass Properties:
         Inertia: false
         Mass: false
@@ -115,23 +81,9 @@ Visualization Manager:
       Frame Timeout: 15
       Frames:
         All Enabled: true
-        arm_link:
+        zx120/base_link:
           Value: true
-        base:
-          Value: true
-        base_link:
-          Value: true
-        body_link:
-          Value: true
-        boom_link:
-          Value: true
-        bucket_end_link:
-          Value: true
-        bucket_link:
-          Value: true
-        track_link:
-          Value: true
-        world:
+        zx120/track_link:
           Value: true
       Marker Scale: 1
       Name: TF
@@ -139,20 +91,15 @@ Visualization Manager:
       Show Axes: true
       Show Names: false
       Tree:
-        base_link:
-          track_link:
-            body_link:
-              boom_link:
-                arm_link:
-                  bucket_link:
-                    bucket_end_link:
-                      {}
+        zx120/base_link:
+          zx120/track_link:
+            {}
       Update Interval: 0
       Value: true
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
-    Fixed Frame: base_link
+    Fixed Frame: zx120/base_link
     Frame Rate: 30
   Name: root
   Tools:

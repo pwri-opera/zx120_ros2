@@ -10,29 +10,29 @@
     <!--CHAINS: When a chain is specified, all the links along the chain (including endpoints) are included in the group. Additionally, all the joints that are parents to included links are also included. This means that joints along the chain and the parent joint of the base link are included in the group-->
     <!--SUBGROUPS: Groups can also be formed by referencing to already defined group names-->
     <group name="manipulator">
-        <joint name="base_joint"/>
-        <joint name="swing_joint"/>
-        <joint name="boom_joint"/>
-        <joint name="arm_joint"/>
-        <joint name="bucket_joint"/>
-        <joint name="bucket_end_joint"/>
-        <chain base_link="base_link" tip_link="bucket_end_link"/>
+        <joint name="zx120/base_joint"/>
+        <joint name="zx120/swing_joint"/>
+        <joint name="zx120/boom_joint"/>
+        <joint name="zx120/arm_joint"/>
+        <joint name="zx120/bucket_joint"/>
+        <joint name="zx120/bucket_end_joint"/>
+        <chain base_link="zx120/base_link" tip_link="zx120/bucket_end_link"/>
     </group>
     <!--GROUP STATES: Purpose: Define a named state for a particular group, in terms of joint values. This is useful to define states like 'folded arms'-->
-    <group_state name="home" group="manipulator">
-        <joint name="arm_joint" value="1.803"/>
-        <joint name="boom_joint" value="-0.5514"/>
-        <joint name="bucket_end_joint" value="0"/>
-        <joint name="bucket_joint" value="1.0172"/>
-        <joint name="swing_joint" value="0"/>
+    <group_state name="home" group="zx120/manipulator">
+        <joint name="zx120/arm_joint" value="1.803"/>
+        <joint name="zx120/boom_joint" value="-0.5514"/>
+        <joint name="zx120/bucket_end_joint" value="0"/>
+        <joint name="zx120/bucket_joint" value="1.0172"/>
+        <joint name="zx120/swing_joint" value="0"/>
     </group_state>
     <!--DISABLE COLLISIONS: By default it is assumed that any link of the robot could potentially come into collision with any other link in the robot. This tag disables collision checking between a specified pair of links. -->
-    <disable_collisions link1="arm_link" link2="body_link" reason="Never"/>
-    <disable_collisions link1="arm_link" link2="boom_link" reason="Adjacent"/>
-    <disable_collisions link1="arm_link" link2="bucket_link" reason="Adjacent"/>
-    <disable_collisions link1="arm_link" link2="track_link" reason="Never"/>
-    <disable_collisions link1="body_link" link2="boom_link" reason="Adjacent"/>
-    <disable_collisions link1="body_link" link2="bucket_link" reason="Never"/>
-    <disable_collisions link1="body_link" link2="track_link" reason="Adjacent"/>
-    <disable_collisions link1="boom_link" link2="bucket_link" reason="Never"/>
+    <disable_collisions link1="zx120/arm_link" link2="zx120/body_link" reason="Never"/>
+    <disable_collisions link1="zx120/arm_link" link2="zx120/boom_link" reason="Adjacent"/>
+    <disable_collisions link1="zx120/arm_link" link2="zx120/bucket_link" reason="Adjacent"/>
+    <disable_collisions link1="zx120/arm_link" link2="zx120/track_link" reason="Never"/>
+    <disable_collisions link1="zx120/body_link" link2="zx120/boom_link" reason="Adjacent"/>
+    <disable_collisions link1="zx120/body_link" link2="zx120/bucket_link" reason="Never"/>
+    <disable_collisions link1="zx120/body_link" link2="zx120/track_link" reason="Adjacent"/>
+    <disable_collisions link1="zx120/boom_link" link2="zx120/bucket_link" reason="Never"/>
 </robot>

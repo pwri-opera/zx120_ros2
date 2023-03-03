@@ -21,21 +21,32 @@ def generate_launch_description():
     return LaunchDescription([
         Node(
             package='robot_state_publisher',
-            # namespace='robot_state_publisher',
+            namespace='zx120',
             executable='robot_state_publisher',
             output="screen",
-            parameters=[params]
+            parameters=[params],
+            # remappings=[('/tf', 'tf'),
+            #         ('/tf_static', 'tf_static'),],
         ),
         Node(
             package='joint_state_publisher_gui',
-            # namespace='joint_state_publisher_gui',
+            namespace='zx120',
             executable='joint_state_publisher_gui',
             output="screen",
         ),
         Node(
             package="rviz2",
             executable="rviz2",
+            namespace='zx120',
             arguments=["--display-config", rviz_config],
             output="screen",
+            remappings=[
+                # ('/tf', 'tf'),
+                # ('/tf_static', 'tf_static'),
+                ('/robot_description', 'robot_description'),
+                # ('/initialpose', 'initialpose'),
+                # ('/clicked_point', 'clicked_point'),
+                # ('/goal_pose', 'goal_pose'),
+            ],
         ),
     ])
