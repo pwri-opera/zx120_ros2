@@ -23,6 +23,7 @@ def generate_launch_description():
         package="nmea_navsat_driver",
         executable="nmea_serial_driver",
         name="nema_serial_driver_node",
+        namespace="gnss_compass",
         parameters=[
             {"port": "/dev/ttyS0"},
             {"baud": 115200},
@@ -37,8 +38,11 @@ def generate_launch_description():
         package="gnss_poser",
         executable="gnss_poser",
         name="fix2tfpose",
+        namespace="gnss_compass",
         parameters=[{"plane_zone": 9},
                     {"coordinate_system": 2}], # plane_zoneを反映
+        remappings=[("/gnss_pose", "gnss_compass/gnss_pose"),
+        ],
         output="screen",
     )
     
