@@ -203,9 +203,9 @@
           </bind_material>
         </instance_geometry>
       </node>
-      <node id="backet" name="backet" type="NODE">
+      <node id="bucket" name="bucket" type="NODE">
         <matrix sid="transform">1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</matrix>
-        <instance_geometry url="#Mesh_010-mesh" name="backet">
+        <instance_geometry url="#Mesh_010-mesh" name="bucket">
           <bind_material>
             <technique_common>
               <instance_material symbol="zx120-material" target="#zx120-material">
