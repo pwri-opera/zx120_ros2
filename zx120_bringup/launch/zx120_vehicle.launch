@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<launch>
+  <arg name="db" default="False" description="By default, we do not start a database (it can be large)" />
+  <arg name="debug" default="False" description="By default, we are not in debug mode" />
+  <arg name="use_rviz" default="True"/>
+  <arg name="robot_name" default="zx120"/>
+  <arg name="robot_description" default="zx120"/>
+
+  <group>
+	<push-ros-namespace namespace="zx120"/>
+	<!-- Given the published joint states, publish tf for the robot links -->
+	<include file="$(find-pkg-share zx120_moveit_config)/launch/rsp.launch.py" />
+
+	<include file="$(find-pkg-share zx120_moveit_config)/launch/move_group.launch.py" />
+
+	<!-- Fake joint driver -->
+	<!-- <node pkg="controller_manager" exec="ros2_control_node" name="ros2_control_node" args="
+		$(var robot_description)
+		$(find-pkg-share zx120_moveit_config)/config/ros2_controllers.yaml"/> -->
+	<node pkg="controller_manager" exec="ros2_control_node" name="ros2_control_node">
+        <param name="robot_description" value="$(var robot_description)" />
+        <param name="ros2_controllers_config_file" value="$(find-pkg-share zx120_moveit_config)/config/ros2_controllers.yaml" />
+    </node>
+
+	<!-- Get the launch directory -->
+	<arg name="deadtime_compensation_dir_path" default="$(find-pkg-share deadtime_compensation)/share/deadtime_compensation"/>
+	<arg name="excavator_pid_control_dir_path" default="$(find-pkg-share excavator_pid_control)/share/excavator_pid_control"/>
+	<arg name="zx120_bringup_dir_path" default="$(find-pkg-share zx120_bringup)/share/zx120_bringup"/>
+	<arg name="map_base_broadcaster_dir_path" default="$(find-pkg-share map_base_broadcaster)/share/map_base_broadcaster"/>
+	<arg name="odom_publisher_dir_path" default="$(find-pkg-share odom_publisher)/share/odom_publisher"/>
+
+	<!-- Config -->
+	<!-- <arg name="robot_description" default=""/>
+	<param name="robot_description" textfile="$(arg robot_description)"/> -->
+	
+	<!-- localization -->
+	<include file="$(find-pkg-share map_base_broadcaster)/launch/map_base_broadcast.launch.py"/>
+	<include file="$(find-pkg-share odom_publisher)/launch/odom_publisher.launch.py"/>
+	<!-- MoveIt! -->
+	<!-- <node pkg="moveit_ros_move_group" exec="move_group" name="move_group" output="screen">
+		<param command="load" file="$(find-pkg-share zx120_moveit_config)/config/move_group.yaml"/>
+		<param command="load" file="$(find-pkg-share zx120_moveit_config)/config/controllers.yaml"/>
+		<param command="load" file="$(find-pkg-share zx120_moveit_config)/config/joint_limits.yaml"/>
+		<param command="load" file="$(find-pkg-share zx120_moveit_config)/config/trajectory_execution.yaml"/>
+		<param command="load" file="$(find-pkg-share zx120_moveit_config)/config/kinematics.yaml"/>
+		<param command="load" file="$(find-pkg-share zx120_moveit_config)/config/ompl_planning.yaml"/>
+		<param command="load" file="$(find-pkg-share zx120_moveit_config)/config/planning_scene_monitor.yaml"/>
+		<param command="load" file="$(find-pkg-share zx120_moveit_config)/config/moveit_rviz.launch"/>
+	</node> -->
+	<include file="$(find-pkg-share zx120_moveit_config)/launch/move_group.launch.py">
+		<!-- <arg name="allow_trajectory_execution" value="true"/> -->
+		<!-- <arg name="fake_execution" value="$(arg fake_execution)"/> -->
+		<!-- <arg name="info" value="true"/> -->
+		<!-- <arg name="debug" value="$(arg debug)"/> -->
+		<!-- <arg name="pipeline" value="$(arg pipeline)"/> -->
+	</include>
+
+	<!-- Deadtime compensation -->
+	<include file="$(find-pkg-share deadtime_compensation)/launch/deadtime_compensation.launch.py">
+		<arg name="dt_compensate" value="True"/>
+	</include>
+
+	<!-- PID controller -->
+	<include file="$(find-pkg-share excavator_pid_control)/launch/zx120_pid.launch.py">
+		<arg name="dt_compensate" value="True"/>
+		<arg name="ff_enable" value="False"/>
+	</include>
+
+	<!-- Include spawn_controllers.launch.py -->
+  	<include file="$(find-pkg-share zx120_moveit_config)/launch/spawn_controllers.launch.py"/>
+
+	<!-- Run Rviz and load the default config to see the state of the move_group node -->
+	<include file="$(find-pkg-share zx120_moveit_config)/launch/moveit_rviz.launch.py" if="$(var use_rviz)" />
+
+	<!-- If database loading was enabled, start mongodb as well -->
+	<include file="$(find-pkg-share zx120_moveit_config)/launch/warehouse_db.launch.py" if="$(var db)" />
+  </group>
+
+  <include file="$(find-pkg-share zx120_bringup)/launch/ekf_localization.launch">
+	<arg name="robot_name" value="$(var robot_name)"/>	
+	<arg name="tf_prefix" value="$(var robot_name)"/>
+  </include>
+
+</launch>
