@@ -70,8 +70,9 @@ zx120のハードウェアのシステム構成を以下のブロック図へ示
 
 ## ソフトウェアシステム
 ### roslaunch zx120_unity zx120_standy.launch.py実行時のノード/トピックパイプライン（rqt_graph）
-![rosgraph_ros2_sim](https://github.com/pwri-opera/zx120_ros2/assets/24404939/8e20c56d-d5ae-420c-8ff6-23ce4881c208)
+![rosgraph_ros2_sim](https://github.com/pwri-opera/zx120_ros2/assets/24404939/1192aea7-bae1-4220-b8fc-18c0c0e2e3b1)
 
 ### roslaunch zx120_bringup zx120_vehicle.launch.py実行時のノード/トピックパイプライン（rqt_graph）  
 注）zx120実機上でのみ実行可能です
-![rosgraph](https://github.com/pwri-opera/zx120_ros2/assets/24404939/72b4905f-fd2f-4516-9522-d26c37637ab6)
+![rosgraph](https://github.com/pwri-opera/zx120_ros2/assets/24404939/7cb2ddb1-da25-43c3-8b22-58f838081da4)
+
