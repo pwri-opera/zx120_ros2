@@ -25,10 +25,6 @@ OPERA対応油圧ショベルzx120の土木研究所公開ROS2パッケージ群
   $ sudo apt install python3-rosdep2 
   $ rosdep update
   $ rosdep install -i --from-path src --rosdistro humble -y 
-  <!--
-  $ git clone https://github.com/strv/vcstool-utils.git
-  $ ./vcstool-utils/import_all.sh -s .rosinstall ~/catkin_ws/src
-  -->
   $ colcon build --symlink-install 
   $ . install/setup.bash
   ```
